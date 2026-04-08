@@ -27,5 +27,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Debug - Check AWS Credentials (Masked)
+      run: |
+        echo "AWS Access Key ID: ${{ secrets.AWS_ACCESS_KEY_ID }}"
+        echo "AWS Secret Access Key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        echo "AWS Region: $AWS_DEFAULT_REGION"
+
     - name: Deploy static site to S3 bucket
       run: aws s3 sync . s3://tws-github-portfolio-demo --delete
