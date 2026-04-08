@@ -1,29 +1,27 @@
 name: Portfolio Deployment
 
 on:
-  workflow_dispatch: 
-  # push:
-    # branches:
-    # - main
-
-    
+  # workflow_dispatch: 
+  push:
+    branches:
+    - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v5
 
-    - name: Deploy static site to S3 bucket
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-east-1
-      run: aws s3 sync . s3://tws-github-portfolio-demo --delete
+    # - name: Deploy static site to S3 bucket
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     AWS_DEFAULT_REGION: us-east-1
+    #   run: aws s3 sync . s3://tws-github-portfolio-demo --delete
     
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v6
+      uses: aws-actions/configure-aws-credentials@v5
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
